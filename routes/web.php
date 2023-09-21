@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +15,21 @@ use App\Http\Controllers\CatalogController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-$config = [
-    'imgAssets' => '/img/'
-];
 
-Route::get('/', function () use ($config) {
-    return view('home', compact('config'));
+Route::middleware(['admin', 'config.get'])->group(function () {
+
+    Route::get('/', function () {
+        return view('home', compact('config'));
+    });
+
+    Route::get('/about', function () {
+        return view('about', compact('config'));
+    });
+
+    Route::get('/catalog', [CatalogController::class, 'index']);
+
+    Route::get('/admin', [AdminController::class, 'index']);
+
+    Route::post('/product-card/update', 'ProductController@update');
 });
-
-Route::get('/about', function () use ($config) {
-    return view('about', compact('config'));
-});
-
-Route::get('/catalog', [CatalogController::class, 'index']);
 

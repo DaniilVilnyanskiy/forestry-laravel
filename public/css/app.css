@@ -448,6 +448,7 @@ a:hover {
 
 .product-card__img {
   height: 190px;
+  position: relative;
 }
 
 .product-card__img img {
@@ -457,9 +458,28 @@ a:hover {
   height: 100%;
 }
 
+.product-card__img_actions {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  left: 6px;
+}
+
+.product-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .product-card__name {
   vertical-align: top;
   display: inline-block;
+}
+
+.product-card__description {
+  resize: vertical;
 }
 
 .product-card__actions {
@@ -470,6 +490,7 @@ a:hover {
 .product-card__btn {
   margin-top: auto;
   margin-left: auto;
+  max-width: 155px;
 }
 
 .product-card__price {

@@ -5,15 +5,37 @@
     }
     &__img {
         height: 190px;
+        position: relative;
+
         img {
             display: block;
             object-fit: cover;
             height: 100%;
         }
+
+        &_actions {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            left: 6px;
+        }
     }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: $indents-sm;
+    }
+
     &__name {
         vertical-align: top;
         display: inline-block;
+    }
+
+    &__description {
+        resize: vertical;
     }
 
     &__actions {
@@ -23,6 +45,7 @@
     &__btn {
         margin-top: auto;
         margin-left: auto;
+        max-width: 155px;
     }
 
     &__price {

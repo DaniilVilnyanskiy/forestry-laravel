@@ -1,6 +1,6 @@
 <header class="container header">
     <div class="header__logo">
-{{--        <img src="{{ $imgAssets }}forestry.png" alt="Логотип">--}}
+{{--        <img src="{{ $config['imgAssets'] }}forestry.png" alt="Логотип">--}}
         <div class="header__logo_title">Пилорама Урала</div>
         <div class="header__logo_subtitle">г. Алапаевск</div>
     </div>

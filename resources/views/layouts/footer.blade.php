@@ -3,7 +3,7 @@
         <div class="footer__col">
             <div class="footer__item">
                 <div class="footer__item_img">
-                    <img src="{{ $imgAssets }}location.png" width="22px" alt="location">
+                    <img src="{{ $config['imgAssets'] }}location.png" width="22px" alt="location">
                 </div>
                 <div class="footer_item_text subtitle">
                     п.Верхняя Синячиха
@@ -11,7 +11,7 @@
             </div>
             <div class="footer__item">
                 <div class="footer__item_img">
-                    <img src="{{ $imgAssets }}call.png" width="19px" alt="location">
+                    <img src="{{ $config['imgAssets'] }}call.png" width="19px" alt="location">
                 </div>
                 <div class="footer_item_text subtitle">
                     +7(999)555-55-55
@@ -19,7 +19,7 @@
             </div>
             <div class="footer__item">
                 <div class="footer__item_img">
-                    <img src="{{ $imgAssets }}call.png" width="19px" alt="location">
+                    <img src="{{ $config['imgAssets'] }}call.png" width="19px" alt="location">
                 </div>
                 <div class="footer_item_text subtitle">
                     +7(800)555-55-55
@@ -29,7 +29,7 @@
         <div class="footer__col">
             <div class="footer__item">
                 <div class="footer__item_img">
-                    <img src="{{ $imgAssets }}pen.png" width="20px" alt="location">
+                    <img src="{{ $config['imgAssets'] }}pen.png" width="20px" alt="location">
                 </div>
                 <a class="footer__item_text subtitle" href="mailto:email96@yandex.ru">
                     Написать нам
@@ -37,7 +37,7 @@
             </div>
             <div class="footer__item">
                 <div class="footer__item_img">
-                    <img src="{{ $imgAssets }}email.png" width="20px" alt="location">
+                    <img src="{{ $config['imgAssets'] }}email.png" width="20px" alt="location">
                 </div>
                 <div class="footer__item_text subtitle">
                     email96@yandex.ru
@@ -45,7 +45,7 @@
             </div>
             <div class="footer__item">
                 <div class="footer__item_img">
-                    <img src="{{ $imgAssets }}email.png" width="20px" alt="location">
+                    <img src="{{ $config['imgAssets'] }}email.png" width="20px" alt="location">
                 </div>
                 <div class="footer__item_text subtitle">
                     secondemail96@yandex.ru
