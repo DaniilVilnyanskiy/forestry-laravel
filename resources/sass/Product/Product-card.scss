@@ -1,0 +1,39 @@
+.product-card {
+    padding-bottom: $indents;
+    &:not(:last-child) {
+        border-bottom: $border;
+    }
+    &__img {
+        height: 190px;
+        img {
+            display: block;
+            object-fit: cover;
+            height: 100%;
+        }
+    }
+    &__name {
+        vertical-align: top;
+        display: inline-block;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+    }
+    &__btn {
+        margin-top: auto;
+        margin-left: auto;
+    }
+
+    &__price {
+        text-align: right;
+    }
+}
+@include md {
+    .product-card {
+        padding-bottom: $indents-sm;
+        &__img {
+            height: 80px;
+        }
+    }
+}

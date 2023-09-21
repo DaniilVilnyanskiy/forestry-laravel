@@ -1,0 +1,52 @@
+.footer {
+    display: block;
+    background: #E7E7E7;
+    box-shadow: $shadow-3;
+    padding-top: $indents;
+    padding-bottom: $indents;
+    margin-top: auto;
+
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $indents;
+    }
+
+    &__col {
+        display: flex;
+        flex-direction: column;
+        gap: $indents-sm;
+        width: calc(50% - $indents-sm);
+
+        &:last-child {
+            .footer__item {
+                flex-direction: row-reverse;
+            }
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: $indents-sm;
+
+        &_img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 22px;
+            height: 22px;
+        }
+    }
+}
+@include md {
+    .footer {
+        &__item {
+            gap: $indents-xsm;
+            &_img {
+                width: 12px;
+                height: 12px;
+            }
+        }
+    }
+}

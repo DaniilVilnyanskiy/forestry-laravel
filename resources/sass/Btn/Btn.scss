@@ -1,0 +1,35 @@
+.btn {
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 10px;
+    box-shadow: $shadow;
+    background: #ffffff;
+    color: black;
+    border: none;
+    width: max-content;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    a {
+        display: block;
+    }
+}
+@include md {
+    .btn {
+        padding: 6px;
+        font-size: 8px;
+        border-radius: 8px;
+
+        &:hover {
+
+        }
+
+        a {
+
+        }
+    }
+
+}

@@ -1,0 +1,19 @@
+.advantages {
+    display: flex;
+    flex-direction: column;
+    gap: $indents;
+    list-style: none;
+
+    &__item {
+        display: flex;
+        align-items: center;
+    }
+
+    &__img {
+        margin-right: $indents;
+        width: 60px;
+
+        img {
+        }
+    }
+}
