@@ -1,8 +1,10 @@
 $black: black;
+$white: white;
 $gray: #b2b2b2;
 
 $link: $black;
 
+$br: 8px;
 $border: 1px solid $gray;
 $indents: 24px;
 $indents-sm: 12px;
@@ -15,9 +17,12 @@ $shadow-3: 0 0 15px 4px rgba(0,0,0,0.2);
 @import "global";
 @import "fonts";
 @import "Btn/Btn";
+@import "Input/Input";
 @import "Header/Header";
 @import "Footer/Footer";
 @import "Catalog/Catalog";
 @import "Cards/Product-card";
 @import "Banner/Banner";
 @import "Advantages/Advantages";
+
+@import "Blink/Blink";

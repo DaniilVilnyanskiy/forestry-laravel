@@ -42,6 +42,34 @@
         display: flex;
         flex-direction: column;
     }
+
+    &__change {
+        position: relative;
+        &-list {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 285px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: $indents-xsm;
+            padding: $indents-sm;
+            background-color: $white;
+            border-radius: $br;
+            box-shadow: $shadow;
+            z-index: 1;
+            max-height: 400px;
+            overflow: auto;
+            li {
+                width: calc(33.333% - 6px);
+                &:hover {
+                    border: $border;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
     &__btn {
         margin-top: auto;
         margin-left: auto;

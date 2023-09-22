@@ -109,28 +109,97 @@ var ProductCard = /*#__PURE__*/function () {
   function ProductCard() {
     _classCallCheck(this, ProductCard);
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.id = null;
-    this.url = '/product-card/update';
+    this.urlUpdate = '/product-card/update';
+    this.urlUploadImage = '/product-card/change-image'; // TODO: не правильное название роута
+    this.selectors = {
+      upload: '#upload-image',
+      remove: '#remove-image',
+      change: '[data-change-image]'
+    };
   }
   _createClass(ProductCard, [{
     key: "init",
     value: function init() {
       document.addEventListener('click', this.handleClick);
+      document.addEventListener('change', this.handleChange);
+    }
+  }, {
+    key: "checkEventAndGetID",
+    value: function checkEventAndGetID(event) {
+      var target = event.target;
+      var id = this.getIdFromParent(target);
+      if (!id) return false;
+      this.id = id;
+      return true;
+    }
+
+    /**
+     * Change for input
+     * @param event
+     */
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      var target = event.target;
+      if (!this.checkEventAndGetID(event)) return;
+      var upload = target.closest(this.selectors.upload);
+      if (upload) this.uploadImage(upload);
     }
   }, {
     key: "handleClick",
     value: function handleClick(event) {
       var target = event.target;
-      var id = this.getIdFromParent(target);
-      if (!id) return;
-      this.id = id;
-      var remove = target.closest('#remove-image');
+      if (!this.checkEventAndGetID(event)) return;
+      var remove = target.closest(this.selectors.remove);
       if (remove) this.removeImage();
+      var change = target.closest(this.selectors.change);
+      if (change) {
+        this.changeImage(change);
+      }
+    }
+  }, {
+    key: "changeImage",
+    value: function changeImage(element) {
+      var imgPath = element === null || element === void 0 ? void 0 : element.dataset.changeImage;
+      if (imgPath) {
+        var check = confirm('Вы точно хотите изменить изображение?');
+        if (!check) return;
+        this.sendData(this.urlUpdate, {
+          id: this.id,
+          type: 'change-image',
+          value: imgPath
+        });
+        this.closeBlickElements();
+      }
+    }
+  }, {
+    key: "uploadImage",
+    value: function uploadImage(inputElement) {
+      var file = inputElement.files[0];
+      var type = file === null || file === void 0 ? void 0 : file.type;
+      if (type !== 'image/jpeg' && type !== 'image/png') {
+        console.log('Only jpeg or png files!');
+        alert('Only .jpeg or .png files');
+        return;
+      }
+      var check = confirm('Вы точно хотите загрузить изображение?');
+      if (!check) return;
+      var formData = new FormData();
+      formData.append('id', this.id);
+      formData.append('file', file);
+      formData.append('type', 'upload-image');
+      this.sendData(this.urlUploadImage, formData, false).then(function () {
+        location.reload();
+      });
     }
   }, {
     key: "removeImage",
     value: function removeImage() {
-      this.sendData({
+      var check = confirm('Вы точно хотите удалить изображение?');
+      if (!check) return;
+      this.sendData(this.urlUpdate, {
         id: this.id,
         type: 'remove-image'
       });
@@ -138,49 +207,78 @@ var ProductCard = /*#__PURE__*/function () {
   }, {
     key: "sendData",
     value: function () {
-      var _sendData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(data) {
-        var csrf, token, response;
+      var _sendData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url, data) {
+        var toJson,
+          csrf,
+          token,
+          response,
+          _args = arguments;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
+              toJson = _args.length > 2 && _args[2] !== undefined ? _args[2] : true;
               csrf = document.querySelector('meta[name="csrf-token"]');
               token = csrf.getAttribute('content');
               if (token) {
-                _context.next = 4;
+                _context.next = 5;
                 break;
               }
               return _context.abrupt("return");
-            case 4:
-              _context.next = 6;
-              return fetch(this.url, {
+            case 5:
+              if (toJson) {
+                data = JSON.stringify(data);
+              }
+              _context.next = 8;
+              return fetch(url, {
                 method: "POST",
                 headers: {
                   'X-CSRF-TOKEN': token
                 },
-                body: JSON.stringify(data)
+                body: data
               }).then(function (res) {
-                return res.json;
+                return res.json();
               });
-            case 6:
-              response = _context.sent;
-              console.log(response);
             case 8:
+              response = _context.sent;
+              this.updateProduct(response);
+            case 10:
             case "end":
               return _context.stop();
           }
         }, _callee, this);
       }));
-      function sendData(_x) {
+      function sendData(_x, _x2) {
         return _sendData.apply(this, arguments);
       }
       return sendData;
     }()
+  }, {
+    key: "updateProduct",
+    value: function updateProduct(data) {
+      if (!data.id) return;
+      var product = document.querySelector("[data-product-id=\"".concat(data.id, "\"]"));
+      if (!product) return;
+      var image = product.querySelector('.product-card__img > img');
+      if (data.img) {
+        image.src = 'img/' + data.img;
+      } else {
+        image.src = 'img/default-product.jpg';
+      }
+    }
   }, {
     key: "getIdFromParent",
     value: function getIdFromParent(target) {
       var parent = target === null || target === void 0 ? void 0 : target.closest('[data-product-id]');
       var id = Number(parent === null || parent === void 0 ? void 0 : parent.dataset.productId);
       if (id) return id;else return false;
+    }
+  }, {
+    key: "closeBlickElements",
+    value: function closeBlickElements() {
+      var elements = document.querySelectorAll('[data-blink-element].active');
+      elements === null || elements === void 0 || elements.forEach(function (el) {
+        return el.classList.remove('active');
+      });
     }
   }]);
   return ProductCard;
@@ -198,10 +296,81 @@ var ProductCard = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_Product_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/Product-card */ "./resources/js/admin/Product-card.js");
+/* harmony import */ var _lib_Blink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/Blink */ "./resources/js/lib/Blink.js");
 // require('./bootstrap');
 
+
+var blink = new _lib_Blink__WEBPACK_IMPORTED_MODULE_1__["Blink"]();
+blink.init();
 var productCard = new _admin_Product_card__WEBPACK_IMPORTED_MODULE_0__["ProductCard"]();
 productCard.init();
+
+/***/ }),
+
+/***/ "./resources/js/lib/Blink.js":
+/*!***********************************!*\
+  !*** ./resources/js/lib/Blink.js ***!
+  \***********************************/
+/*! exports provided: Blink */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Blink", function() { return Blink; });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var Blink = /*#__PURE__*/function () {
+  function Blink() {
+    _classCallCheck(this, Blink);
+    this.handleClick = this.handleClick.bind(this);
+    this.selectors = {
+      btn: 'data-blink-btn-link',
+      element: 'data-blink-element'
+    };
+  }
+  _createClass(Blink, [{
+    key: "init",
+    value: function init() {
+      document.addEventListener('click', this.handleClick);
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(event) {
+      var target = event.target;
+      var btnLink = target.closest("[".concat(this.selectors.btn, "]"));
+      if (btnLink) {
+        var btnLinkValue = btnLink.dataset.blinkBtnLink;
+        this.displayChangeElement(btnLinkValue);
+      }
+      var element = target.closest("[".concat(this.selectors.element, "]"));
+      if (!btnLink && !element) {
+        this.hideOneElement();
+      }
+    }
+  }, {
+    key: "displayChangeElement",
+    value: function displayChangeElement(btnLinkValue) {
+      var element = document.querySelector("[".concat(this.selectors.element, "=\"").concat(btnLinkValue, "\"]"));
+      if (element && element.classList.contains('active')) {
+        element.classList.remove('active');
+      } else if (element && !element.classList.contains('active')) {
+        this.hideOneElement();
+        element.classList.add('active');
+      }
+    }
+  }, {
+    key: "hideOneElement",
+    value: function hideOneElement() {
+      var activeElement = document.querySelector('[data-blink-element].active');
+      if (activeElement) activeElement.classList.remove('active');
+    }
+  }]);
+  return Blink;
+}();
 
 /***/ }),
 

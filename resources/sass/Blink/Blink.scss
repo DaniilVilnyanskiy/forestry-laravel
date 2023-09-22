@@ -1,0 +1,6 @@
+[data-blink-element] {
+    &:not(.active) {
+        display: none;
+    }
+
+}

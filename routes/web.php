@@ -31,5 +31,7 @@ Route::middleware(['admin', 'config.get'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
 
     Route::post('/product-card/update', 'ProductController@update');
+
+    Route::post('/product-card/change-image', 'ProductController@changeImage');
 });
 

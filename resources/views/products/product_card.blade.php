@@ -10,7 +10,22 @@
         <img src="{{ $config['imgAssets'] }}{{ $product['img'] ?? 'default-product.jpg'}}" alt="Product">
         @if($isAdmin)
             <div class="product-card__img_actions">
-                <button class="btn" id="change-image">Изменить</button>
+                <div class="product-card__change">
+                    <button class="btn" data-blink-btn-link="change-list-{{ $product['id'] }}">Изменить</button>
+                    <ul class="product-card__change-list" data-blink-element="change-list-{{ $product['id'] }}">
+                        @foreach($imagePaths as $item)
+                            <li data-change-image="{{ $item }}">
+                                <img src="{{ $config['imgAssets'] }}{{ $item }}" alt="Mini">
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                @include('components.Input', [
+                        'name' => 'upload-image',
+                        'value' => '',
+                        'type' => 'file',
+                        'placeholder' => 'Загрузить'
+                    ])
                 <button class="btn" id="remove-image">Удалить</button>
             </div>
         @endif

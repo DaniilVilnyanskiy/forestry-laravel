@@ -1,0 +1,23 @@
+.input {
+    position: relative;
+    &.btn {
+        padding: 0;
+        .input__label {
+            padding: 10px;
+            display: block;
+        }
+    }
+
+    &__label {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__input {
+        -webkit-appearance: none;
+        height: 0;
+        width: 0;
+        position: absolute;
+    }
+}
