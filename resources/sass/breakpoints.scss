@@ -14,3 +14,13 @@
         @content;
     }
 }
+@mixin sm {
+    @media screen and (max-width: 575px) {
+        @content;
+    }
+}
+@mixin afterSm {
+    @media screen and (min-width: 576px) {
+        @content;
+    }
+}

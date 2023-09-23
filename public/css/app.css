@@ -93,6 +93,7 @@ h1 {
   border: 0;
   padding: 10px;
   margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -151,11 +152,11 @@ h1 {
 }
 
 .form-toOrder input {
-  width: 60%;
+  width: 80%;
 }
 
 .form-toOrder {
-  width: 60%;
+  width: 80%;
   margin: 7% auto auto;
   text-align: center;
   font-weight: bold;
@@ -165,7 +166,7 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 90%;
   margin-bottom: 3%;
 }
 
@@ -599,6 +600,530 @@ a:hover {
 .advantages__img {
   margin-right: 24px;
   width: 60px;
+}
+
+.my-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 448px;
+  animation-name: openModal;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: backwards;
+  display: none;
+  z-index: 5001;
+}
+
+.my-modal.active {
+  display: block;
+}
+
+.my-modal.scroll {
+  top: 0;
+  bottom: 0;
+  background: transparent;
+  transform: translate(-50%, 0);
+  animation-name: openModalScroll;
+}
+
+.my-modal.scroll .my-modal__body {
+  overflow-y: auto;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.my-modal__container {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 8px;
+  height: 100%;
+}
+
+.my-modal__head {
+  display: flex;
+  padding: 16px 64px 16px 24px;
+  position: relative;
+}
+
+.my-modal__head svg {
+  fill: black;
+}
+
+.my-modal__head-text {
+  flex: 1;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24px;
+}
+
+.my-modal__head-close {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+
+.my-modal__head-back {
+  position: relative;
+  left: -20px;
+  top: -12px;
+}
+
+.my-modal__body {
+  flex: 1;
+  overflow: hidden;
+}
+
+.my-modal__footer {
+  padding: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.my-modal_drawer {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: initial;
+  transform: none;
+  border-radius: 0;
+  animation-name: openDrawer;
+  width: 626px;
+  min-width: 626px;
+  background: #d3ceca;
+}
+
+@media screen and (max-width: 768px) {
+  .my-modal_drawer {
+    min-width: 100%;
+    width: 100%;
+    animation-name: openDrawerSm;
+  }
+}
+
+.my-modal_drawer .my-modal__head {
+  padding: 16px 60px 16px 24px;
+  align-items: center;
+}
+
+.my-modal_drawer .my-modal__head .my-modal__head-close {
+  top: 16px;
+  right: 16px;
+}
+
+.my-modal_drawer .my-modal__head .my-modal__head-text {
+  padding: 8px 0;
+}
+
+.my-modal_drawer .my-modal__head .my-modal__head-back {
+  top: initial;
+  left: -8px;
+}
+
+@media screen and (min-width: 576px) {
+  .my-modal_menu {
+    position: absolute;
+    min-width: 300px;
+    top: calc(100% + 20px);
+    left: calc(50% - 30px);
+    right: initial;
+    bottom: initial;
+    transform: initial;
+    animation-name: openMenu;
+  }
+
+  .my-modal_menu .my-modal__head {
+    padding: 8px;
+  }
+
+  .my-modal_menu .my-modal__head .my-modal__head-close {
+    display: none;
+  }
+
+  .my-modal_menu .my-modal__head .my-modal__head-text {
+    padding: 0;
+  }
+
+  .my-modal_menu .my-modal__head .my-modal__head-back {
+    display: none;
+  }
+
+  .my-modal_menu .my-modal__body {
+    padding: 0 8px;
+  }
+
+  .my-modal_menu .my-modal__footer {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .my-modal_menu:before {
+    content: "";
+    width: 20px;
+    height: 8px;
+    position: absolute;
+    top: -8px;
+    left: 16px;
+  }
+}
+
+.my-modal_notification {
+  color: white;
+  top: initial;
+  bottom: 24px;
+  left: initial;
+  right: 24px;
+  max-width: 400px;
+  transform: none;
+  padding-left: 32px;
+  animation-name: showNotification;
+}
+
+.my-modal_notification .my-modal__body {
+  font-size: 13px;
+}
+
+.my-modal_notification::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+}
+
+.my-modal_filter {
+  min-width: 626px;
+  background: #d3ceca;
+}
+
+@media screen and (max-width: 768px) {
+  .my-modal_filter {
+    min-width: 100%;
+  }
+}
+
+.my-modal_basket {
+  width: 1000px;
+}
+
+@media (max-width: 1050px) {
+  .my-modal_basket {
+    width: 100%;
+  }
+}
+
+.my-modal_callback {
+  min-width: 706px;
+  max-width: 706px;
+}
+
+@media screen and (max-width: 768px) {
+  .my-modal_callback {
+    min-width: 100%;
+    max-width: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: none;
+  }
+}
+
+.my-modal_sign {
+  width: 626px;
+  max-width: 100%;
+  height: 767px;
+  max-height: 100%;
+}
+
+@media screen and (max-width: 575px) {
+  .my-modal_sign {
+    height: 720px;
+  }
+}
+
+.my-modal.closeModal {
+  animation-name: closeModal !important;
+}
+
+@media screen and (max-width: 575px) {
+  .my-modal.closeModal {
+    animation-name: closeModalSm !important;
+  }
+}
+
+.my-modal.closeModal.scroll {
+  animation-name: closeModalScroll !important;
+}
+
+@media screen and (max-width: 575px) {
+  .my-modal.closeModal.scroll {
+    animation-name: closeModalSm !important;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .my-modal:not(.my-modal_drawer) {
+    top: initial;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    min-width: initial;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .my-modal:not(.my-modal_drawer).scroll {
+    top: 0;
+  }
+
+  .my-modal_drawer {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    min-width: 100vw;
+    width: initial;
+  }
+
+  .my-modal_drawer .my-modal__head {
+    padding: 4px 48px 4px 16px;
+  }
+
+  .my-modal_drawer .my-modal__head .my-modal__head-close {
+    top: 4px;
+    right: 4px;
+  }
+
+  .my-modal_drawer .my-modal__head .my-modal__head-text {
+    padding: 8px 0;
+  }
+
+  .my-modal_drawer .my-modal__head .my-modal__head-back {
+    top: initial;
+    left: -12px;
+  }
+
+  .my-modal_notification {
+    max-width: initial;
+  }
+
+  .my-modal__head {
+    padding: 16px 56px 16px 16px;
+  }
+
+  .my-modal__footer {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .my-modal__footer .btn {
+    flex: 1;
+  }
+}
+
+.my-modal-shadow {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+}
+
+.my-modal-shadow.active {
+  display: block;
+}
+
+.my-modal-shadow.disabling {
+  display: block;
+}
+
+@keyframes closeNotification {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+}
+
+@keyframes showNotification {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes showShadow {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hideShadow {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes openMenu {
+  0% {
+    transform: scale(0.6);
+    transform-origin: 0% -20%;
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+
+@keyframes openDrawer {
+  0% {
+    right: -400px;
+    opacity: 0;
+  }
+
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes openDrawerSm {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes closeDrawer {
+  0% {
+    right: 0;
+    opacity: 1;
+  }
+
+  100% {
+    right: -400px;
+    opacity: 0;
+  }
+}
+
+@keyframes closeDrawerSm {
+  0% {
+    right: 0;
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes openModal {
+  0% {
+    top: 60%;
+    opacity: 0;
+  }
+
+  100% {
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+@keyframes openModalScroll {
+  0% {
+    top: 60%;
+    opacity: 0;
+  }
+
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes openModalSm {
+  0% {
+    bottom: -200px;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes closeModal {
+  0% {
+    top: 50%;
+    opacity: 1;
+  }
+
+  100% {
+    top: 60%;
+    opacity: 0;
+  }
+}
+
+@keyframes closeModalScroll {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+
+  100% {
+    top: 60%;
+    opacity: 0;
+  }
+}
+
+@keyframes closeModalSm {
+  0% {
+    bottom: 0;
+    opacity: 1;
+  }
+
+  100% {
+    bottom: -200px;
+    opacity: 0;
+  }
 }
 
 [data-blink-element]:not(.active) {
