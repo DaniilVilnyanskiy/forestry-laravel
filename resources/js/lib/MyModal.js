@@ -53,7 +53,6 @@ export default class MyModal {
   clickHandler(e) {
     // Открытие модалки
     const modalOpener = e.target.closest(`[${this.config.openSelector}]`);
-    console.log(modalOpener);
     const modalActive = e.target.closest('.my-modal.active');
 
     const activeModalMenu = document.querySelector('.my-modal_menu.active');

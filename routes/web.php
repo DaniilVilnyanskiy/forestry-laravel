@@ -32,6 +32,9 @@ Route::middleware(['admin', 'config.get'])->group(function () {
 
     Route::post('/product-card/update', 'ProductController@update');
 
+    Route::post('/product-card/create', 'ProductController@create');
+
     Route::post('/product-card/change-image', 'ProductController@changeImage');
+
 });
 

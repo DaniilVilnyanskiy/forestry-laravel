@@ -3,6 +3,20 @@
     &:not(:last-child) {
         border-bottom: $border;
     }
+    &__new {
+        margin-bottom: 24px;
+        .product-card {
+            &__img {
+                &_actions {
+                    display: none;
+                }
+            }
+            &__btn {
+                display: none;
+            }
+
+        }
+    }
     &__img {
         height: 190px;
         position: relative;

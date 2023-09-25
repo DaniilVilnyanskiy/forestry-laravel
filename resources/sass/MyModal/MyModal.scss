@@ -14,12 +14,12 @@
     display: none;
     z-index: 5001;
     // box-shadow: $box-shadow;
-  
+
     // Status
     &.active {
       display: block;
     }
-  
+
     // Set scroll
     &.scroll {
       top: 0;
@@ -35,7 +35,7 @@
         }
       }
     }
-  
+
     // Elements
     &__container {
       display: flex;
@@ -44,23 +44,23 @@
         border-radius: 8px;
         height: 100%;
     }
-  
+
     &__head {
       display: flex;
       padding: 16px 64px 16px 24px;
       position: relative;
-  
+
       svg {
         fill: $black;
       }
-  
+
       &-text {
         flex: 1;
         font-weight: 500;
         font-size: 17px;
         line-height: 24px;
       }
-  
+
       &-close {
         position: absolute;
         right: 4px;
@@ -72,27 +72,27 @@
         top: -12px;
       }
     }
-  
+
     &__body {
       //padding: 0 24px;
       flex: 1;
       overflow: hidden;
     }
-  
+
     &__footer {
       padding: 24px;
       display: flex;
       justify-content: flex-end;
       gap: 12px;
     }
-  
+
     // Mods
     &_drawer {
       right: 0;
       top: 0;
       bottom: 0;
       left: initial;
-  
+
       transform: none;
       border-radius: 0;
       animation-name: openDrawer;
@@ -104,11 +104,11 @@
         width: 100%;
         animation-name: openDrawerSm;
       }
-  
+
       .my-modal__head {
         padding: 16px 60px 16px 24px;
         align-items: center;
-  
+
         .my-modal__head-close {
           top: 16px;
           right: 16px;
@@ -122,7 +122,7 @@
         }
       }
     }
-  
+
     &_menu {
       @include afterSm {
         position: absolute;
@@ -133,11 +133,11 @@
         bottom: initial;
         transform: initial;
         animation-name: openMenu;
-  
+
         .my-modal {
           &__head {
             padding: 8px;
-  
+
             .my-modal__head-close {
               display: none;
             }
@@ -156,7 +156,7 @@
             gap: 8px;
           }
         }
-  
+
         &:before {
           content: '';
           width: 20px;
@@ -168,7 +168,7 @@
         }
       }
     }
-  
+
     &_notification {
     //   background: $text-1;
       color: $white;
@@ -180,12 +180,12 @@
       transform: none;
       padding-left: 32px;
       animation-name: showNotification;
-  
+
       .my-modal__body {
         font-size: 13px;
         // color: $ui-gray-2;
       }
-  
+
       &::before {
         content: '';
         position: absolute;
@@ -194,7 +194,7 @@
         width: 24px;
         height: 24px;
       }
-  
+
       &.info {
         &::before {
         //   background: url('/assets/img/svg/info.svg');
@@ -237,7 +237,7 @@
         max-width: none;
         left: 0;
         right: 0;
-  
+
         bottom: 0;
         transform: none;
       }
@@ -251,7 +251,7 @@
         height: 720px;
       }
     }
-  
+
     // Animations
     &.closeDrawer {
     //   animation-name: closeDrawer !important;
@@ -259,10 +259,10 @@
         // animation-name: closeDrawerSm !important;
       }
     }
-  
+
     &.closeModal {
       animation-name: closeModal !important;
-  
+
       @include sm {
         animation-name: closeModalSm !important;
       }
@@ -273,16 +273,16 @@
         }
       }
     }
-  
+
     &.closeNotification {
     //   animation-name: closeNotification !important;
-  
+
       @include sm {
         // animation-name: closeModalSm !important;
       }
     }
   }
-  
+
   @include sm {
     .my-modal {
       &:not(.my-modal_drawer) {
@@ -299,17 +299,17 @@
           top: 0;
         }
       }
-  
+
       &_drawer {
         top: 0;
         bottom: 0;
         right: 0;
         min-width: 100vw;
         width: initial;
-  
+
         .my-modal__head {
           padding: 4px 48px 4px 16px;
-  
+
           .my-modal__head-close {
             top: 4px;
             right: 4px;
@@ -323,11 +323,11 @@
           }
         }
       }
-  
+
       &_notification {
         max-width: initial;
       }
-  
+
       &__head {
         padding: 16px 56px 16px 16px;
       }
@@ -337,14 +337,14 @@
       &__footer {
         padding: 16px;
         gap: 12px;
-  
+
         .btn {
           flex: 1;
         }
       }
     }
   }
-  
+
   .my-modal-shadow {
     position: fixed;
     top: 0;
@@ -354,25 +354,25 @@
     display: none;
     background: rgba(0, 0, 0, 0.3);
     z-index: 2;
-  
+
     // animation-duration: $animation-duration;
     // animation-timing-function: $animation-type;
     animation-delay: 0s;
     animation-iteration-count: 1;
     animation-direction: normal;
-  
+
     &.active {
       display: block;
-  
-    //   animation-name: showShadow;
+
+       animation-name: showShadow;
     }
-  
+
     &.disabling {
       display: block;
-    //   animation-name: hideShadow;
+       animation-name: hideShadow;
     }
   }
-  
+
   @keyframes closeNotification {
     0% {
       transform: translateX(0);
@@ -383,7 +383,7 @@
       opacity: 0;
     }
   }
-  
+
   @keyframes showNotification {
     0% {
       transform: translateX(1000px);
@@ -394,7 +394,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes showShadow {
     0% {
       opacity: 0;
@@ -403,7 +403,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes hideShadow {
     0% {
       opacity: 1;
@@ -412,7 +412,7 @@
       opacity: 0;
     }
   }
-  
+
   @keyframes openMenu {
     0% {
       transform: scale(0.6);
@@ -425,7 +425,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes openDrawer {
     0% {
       right: -400px;
@@ -436,7 +436,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes openDrawerSm {
     0% {
       //right: -400px;
@@ -447,7 +447,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes closeDrawer {
     0% {
       right: 0;
@@ -458,7 +458,7 @@
       opacity: 0;
     }
   }
-  
+
   @keyframes closeDrawerSm {
     0% {
       right: 0;
@@ -469,7 +469,7 @@
       opacity: 0;
     }
   }
-  
+
   @keyframes openModal {
     0% {
       top: 60%;
@@ -480,7 +480,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes openModalScroll {
     0% {
       top: 60%;
@@ -491,7 +491,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes openModalSm {
     0% {
       bottom: -200px;
@@ -502,7 +502,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes closeModal {
     0% {
       top: 50%;
@@ -523,7 +523,7 @@
       opacity: 0;
     }
   }
-  
+
   @keyframes closeModalSm {
     0% {
       bottom: 0;
@@ -534,4 +534,3 @@
       opacity: 0;
     }
 }
-  

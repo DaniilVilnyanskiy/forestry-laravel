@@ -1,13 +1,9 @@
 <div class="my-modal" id='order'>
   <div class="my-modal__container">
     <div class="my-modal__head">
-      <div class="my-modal__head-back">
-        <button class="btn btn_square" data-my-modal="data-my-modal"></button>
-      </div>
-      <div class="my-modal__head-text"></div>
-      <div class="my-modal__head-close">
-        <button class="btn btn_square" data-my-modal-close="#1"></button>
-      </div>
+      <button class="my-modal__head-close" data-my-modal-close="#1">
+        Закрыть
+      </button>
     </div>
     <div class="my-modal__body">
         <form class="form-toOrder" action="send.php" method="post">Введите данные для расчета<br><br><br>

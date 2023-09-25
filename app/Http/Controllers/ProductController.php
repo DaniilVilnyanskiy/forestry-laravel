@@ -18,17 +18,32 @@ class ProductController extends Controller
 
 
         if ($requestData['id']) {
-            $product = Product::where('id', $requestData['id'])->first(); // Используйте first() для получения одной записи
+            // Используйте first() для получения одной записи
+            $product = Product::where('id', $requestData['id'])->first();
             if ($product) {
                 // Удаление изображения из карточки товара
                 if ($requestData['type'] === 'remove-image') {
                     $product['img'] = null;
                     $product->save();
                     return json_encode($product);
+
+                // Изменение изображения в карточке товара
                 } else if ($requestData['type'] === 'change-image') {
                     $product['img'] = $requestData['value'];
                     $product->save();
                     return json_encode($product);
+
+                // Изменение данных в полях карточки товара
+                } else if ($requestData['type'] === "update-product") {
+                    if (isset($requestData['data'])) {
+                        foreach ($requestData['data'] as $key => $value) {
+                            $product[$key] = $value;
+                        }
+                        $product->save();
+                        $response = response()->json(['message' => 'Product update successfully'], 201);
+                    } else {
+                        $response = response()->json(['message' => 'Not found - data'], 400);
+                    }
                 } else {
                     $response = json_encode($product); // Преобразовать объект в JSON строку
                 }
@@ -70,5 +85,26 @@ class ProductController extends Controller
             // Возвращаем ответ об успешной загрузке
             return response()->json(['message' => 'Файл успешно загружен', 'file_name' => $fileName]);
         }
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return false|Request|string
+     */
+    public function create(Request $request)
+    {
+        $requestData = $request->json()->all()['data'];
+
+        // Создаем новую модель Product и заполняем поля данными из запроса
+        $product = new Product([
+            'name' => $requestData['name'],
+            'description' => $requestData['description'],
+            'price' => $requestData['price'],
+        ]);
+
+        // Сохраняем модель в базе данных
+        $product->save();
+
+        return response()->json(['message' => 'Product created successfully'], 201);
     }
 }
