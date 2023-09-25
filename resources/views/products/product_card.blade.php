@@ -48,7 +48,7 @@
             <div class="product-card__price">
                 {{ $product['price'] ? $product['price'] . ' р' : 'Цена по запросу' }}
             </div>
-            <button class="product-card__btn btn"> Заказать расчет </button>
+            <button class="product-card__btn btn" data-my-modal='#order'> Заказать расчет </button>
         @else
             <input class="product-card__price" value="{{ $product['price'] }}">
             <button class="product-card__btn btn">Сохранить название, описание и цену</button>

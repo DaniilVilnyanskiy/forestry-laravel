@@ -27,6 +27,10 @@
         @yield('content')
     </main>
 
+    <section>
+        @include('components.Modals.Order')
+    </section>
+
     {{-- footer --}}
     @if($currentRouteName !== 'admin')
         @include('layouts.footer')
