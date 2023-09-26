@@ -28,7 +28,7 @@
     </main>
 
     <section>
-        @include('components.Modals.Order')
+        @include('components.Modals.Order', ['modal' => 'order', 'modalTitle' => 'Введите данные для расчета'])
     </section>
 
     {{-- footer --}}

@@ -1,18 +1,16 @@
-<div class="my-modal" id='order'>
-  <div class="my-modal__container">
-    <div class="my-modal__head">
-      <button class="my-modal__head-close" data-my-modal-close="#1">
-        Закрыть
-      </button>
-    </div>
-    <div class="my-modal__body">
-        <form class="form-toOrder" action="" method="post">Введите данные для расчета<br><br><br>
-            <input type="text" class="popup-text-input" autocomplete="off" name="fio" placeholder="Введите имя" required><br><br>
-            <input type="text" class="popup-text-input" autocomplete="off" name="email" placeholder="Введите номер телефона" required class="popup-text-input"><br><br>
-            <input type="text"  class="popup-text-input3" autocomplete="off" name="email" placeholder="Комментарий к заявке" required><br><br>
-            <input type="submit" class="input-type-submit" value="Отправить">
-        </form>
-    </div>
-    <div class="my-modal__footer"></div>
-  </div>
-</div>
+@extends('components.Modals.template')
+
+@section('modal.body')
+    <form class="form" action="" method="post">
+        <div class="form-group">
+            <input class="title-xsm" type="text" name="name" placeholder="Введите имя" required>
+        </div>
+        <div class="form-group">
+            <input class="title-xsm" type="text" name="phone" placeholder="Введите номер телефона" required>
+        </div>
+        <div class="form-group">
+            <textarea class="title-xsm" rows="5" placeholder="Комментарий к заявке"></textarea>
+        </div>
+        <button type="submit" class="btn w-100">Отправить</button>
+    </form>
+@endsection

@@ -3,7 +3,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 448px;
+    min-width: 380px;
     animation-name: openModal;
     animation-duration: $animation-duration;
     animation-timing-function: $animation-type;
@@ -13,339 +13,365 @@
     animation-fill-mode: backwards;
     display: none;
     z-index: 5001;
-    // box-shadow: $box-shadow;
+    box-shadow: $shadow;
 
     // Status
     &.active {
-      display: block;
+        display: block;
     }
 
     // Set scroll
     &.scroll {
-      top: 0;
-      bottom: 0;
-      background: transparent;
-      transform: translate(-50%, 0);
-      animation-name: openModalScroll;
-      .my-modal {
-        &__body {
-          overflow-y: auto;
-          padding-top: 24px;
-          padding-bottom: 24px;
+        top: 0;
+        bottom: 0;
+        background: transparent;
+        transform: translate(-50%, 0);
+        animation-name: openModalScroll;
+
+        .my-modal {
+            &__body {
+                overflow-y: auto;
+                padding-top: 24px;
+                padding-bottom: 24px;
+            }
         }
-      }
     }
 
     // Elements
     &__container {
-      display: flex;
-      flex-direction: column;
+        display: flex;
+        flex-direction: column;
         background: $white;
         border-radius: 8px;
         height: 100%;
+        padding-bottom: $indents-sm;
     }
 
     &__head {
-      display: flex;
-      padding: 16px 64px 16px 24px;
-      position: relative;
-
-      svg {
-        fill: $black;
-      }
-
-      &-text {
-        flex: 1;
-        font-weight: 500;
-        font-size: 17px;
-        line-height: 24px;
-      }
-
-      &-close {
-        position: absolute;
-        right: 4px;
-        top: 4px;
-      }
-      &-back {
+        display: flex;
+        padding: $indents-sm $indents;
         position: relative;
-        left: -20px;
-        top: -12px;
-      }
+        justify-content: center;
+
+        svg {
+            fill: $black;
+        }
+
+        &-text {
+            flex: 1;
+            font-weight: 500;
+            font-size: 17px;
+            line-height: 24px;
+        }
+
+        &-close {
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        &-back {
+            position: relative;
+            left: -20px;
+            top: -12px;
+        }
     }
 
     &__body {
-      //padding: 0 24px;
-      flex: 1;
-      overflow: hidden;
+        padding: $indents-sm $indents;
+        flex: 1;
+        overflow: hidden;
     }
 
     &__footer {
-      padding: 24px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
+        padding: 24px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
     }
 
     // Mods
     &_drawer {
-      right: 0;
-      top: 0;
-      bottom: 0;
-      left: initial;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        left: initial;
 
-      transform: none;
-      border-radius: 0;
-      animation-name: openDrawer;
-      width: 626px;
-      min-width: 626px;
-      background: #d3ceca;
-      @include md {
-        min-width: 100%;
-        width: 100%;
-        animation-name: openDrawerSm;
-      }
+        transform: none;
+        border-radius: 0;
+        animation-name: openDrawer;
+        width: 626px;
+        min-width: 626px;
+        background: #d3ceca;
+        @include md {
+            min-width: 100%;
+            width: 100%;
+            animation-name: openDrawerSm;
+        }
 
-      .my-modal__head {
-        padding: 16px 60px 16px 24px;
-        align-items: center;
+        .my-modal__head {
+            padding: 16px 60px 16px 24px;
+            align-items: center;
 
-        .my-modal__head-close {
-          top: 16px;
-          right: 16px;
+            .my-modal__head-close {
+                top: 16px;
+                right: 16px;
+            }
+
+            .my-modal__head-text {
+                padding: 8px 0;
+            }
+
+            .my-modal__head-back {
+                top: initial;
+                left: -8px;
+            }
         }
-        .my-modal__head-text {
-          padding: 8px 0;
-        }
-        .my-modal__head-back {
-          top: initial;
-          left: -8px;
-        }
-      }
     }
 
     &_menu {
-      @include afterSm {
-        position: absolute;
-        min-width: 300px;
-        top: calc(100% + 20px);
-        left: calc(50% - 30px);
-        right: initial;
-        bottom: initial;
-        transform: initial;
-        animation-name: openMenu;
+        @include afterSm {
+            position: absolute;
+            min-width: 300px;
+            top: calc(100% + 20px);
+            left: calc(50% - 30px);
+            right: initial;
+            bottom: initial;
+            transform: initial;
+            animation-name: openMenu;
 
-        .my-modal {
-          &__head {
-            padding: 8px;
+            .my-modal {
+                &__head {
+                    padding: 8px;
 
-            .my-modal__head-close {
-              display: none;
+                    .my-modal__head-close {
+                        display: none;
+                    }
+
+                    .my-modal__head-text {
+                        padding: 0;
+                    }
+
+                    .my-modal__head-back {
+                        display: none;
+                    }
+                }
+
+                &__body {
+                    padding: 0 8px;
+                }
+
+                &__footer {
+                    padding: 8px;
+                    gap: 8px;
+                }
             }
-            .my-modal__head-text {
-              padding: 0;
+
+            &:before {
+                content: '';
+                width: 20px;
+                height: 8px;
+                position: absolute;
+                top: -8px;
+                left: 16px;
+                //   background: url('~@/assets/img/svg/bugor.svg') no-repeat;
             }
-            .my-modal__head-back {
-              display: none;
-            }
-          }
-          &__body {
-            padding: 0 8px;
-          }
-          &__footer {
-            padding: 8px;
-            gap: 8px;
-          }
         }
-
-        &:before {
-          content: '';
-          width: 20px;
-          height: 8px;
-          position: absolute;
-          top: -8px;
-          left: 16px;
-        //   background: url('~@/assets/img/svg/bugor.svg') no-repeat;
-        }
-      }
     }
 
     &_notification {
-    //   background: $text-1;
-      color: $white;
-      top: initial;
-      bottom: 24px;
-      left: initial;
-      right: 24px;
-      max-width: 400px;
-      transform: none;
-      padding-left: 32px;
-      animation-name: showNotification;
-
-      .my-modal__body {
-        font-size: 13px;
-        // color: $ui-gray-2;
-      }
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 16px;
-        left: 16px;
-        width: 24px;
-        height: 24px;
-      }
-
-      &.info {
-        &::before {
-        //   background: url('/assets/img/svg/info.svg');
-        }
-      }
-      &.warning {
-        &::before {
-        //   background: url('/assets/img/svg/warning.svg');
-        }
-      }
-      &.error {
-        &::before {
-        //   background: url('/assets/img/svg/error.svg');
-        }
-      }
-      &.success {
-        &::before {
-        //   background: url('/assets/img/svg/success.svg');
-        }
-      }
-    }
-    &_filter {
-      min-width: 626px;
-      background: #d3ceca;
-      @include md {
-        min-width: 100%;
-      }
-    }
-    &_basket {
-      width: 1000px;
-      @media (max-width: 1050px) {
-        width: 100%;
-      }
-    }
-    &_callback {
-      min-width: 706px;
-      max-width: 706px;
-      @include md {
-        min-width: 100%;
-        max-width: none;
-        left: 0;
-        right: 0;
-
-        bottom: 0;
+        //   background: $text-1;
+        color: $white;
+        top: initial;
+        bottom: 24px;
+        left: initial;
+        right: 24px;
+        max-width: 400px;
         transform: none;
-      }
+        padding-left: 32px;
+        animation-name: showNotification;
+
+        .my-modal__body {
+            font-size: 13px;
+            // color: $ui-gray-2;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 24px;
+            height: 24px;
+        }
+
+        &.info {
+            &::before {
+                //   background: url('/assets/img/svg/info.svg');
+            }
+        }
+
+        &.warning {
+            &::before {
+                //   background: url('/assets/img/svg/warning.svg');
+            }
+        }
+
+        &.error {
+            &::before {
+                //   background: url('/assets/img/svg/error.svg');
+            }
+        }
+
+        &.success {
+            &::before {
+                //   background: url('/assets/img/svg/success.svg');
+            }
+        }
     }
+
+    &_filter {
+        min-width: 626px;
+        background: #d3ceca;
+        @include md {
+            min-width: 100%;
+        }
+    }
+
+    &_basket {
+        width: 1000px;
+        @media (max-width: 1050px) {
+            width: 100%;
+        }
+    }
+
+    &_callback {
+        min-width: 706px;
+        max-width: 706px;
+        @include md {
+            min-width: 100%;
+            max-width: none;
+            left: 0;
+            right: 0;
+
+            bottom: 0;
+            transform: none;
+        }
+    }
+
     &_sign {
-      width: 626px;
-      max-width: 100%;
-      height: 767px;
-      max-height: 100%;
-      @include sm {
-        height: 720px;
-      }
+        width: 626px;
+        max-width: 100%;
+        height: 767px;
+        max-height: 100%;
+        @include sm {
+            height: 720px;
+        }
     }
 
     // Animations
     &.closeDrawer {
-    //   animation-name: closeDrawer !important;
-      @include md {
-        // animation-name: closeDrawerSm !important;
-      }
+        //   animation-name: closeDrawer !important;
+        @include md {
+            // animation-name: closeDrawerSm !important;
+        }
     }
 
     &.closeModal {
-      animation-name: closeModal !important;
+        animation-name: closeModal !important;
 
-      @include sm {
-        animation-name: closeModalSm !important;
-      }
-      &.scroll {
-        animation-name: closeModalScroll !important;
         @include sm {
-          animation-name: closeModalSm !important;
+            animation-name: closeModalSm !important;
         }
-      }
+
+        &.scroll {
+            animation-name: closeModalScroll !important;
+            @include sm {
+                animation-name: closeModalSm !important;
+            }
+        }
     }
 
     &.closeNotification {
-    //   animation-name: closeNotification !important;
+        //   animation-name: closeNotification !important;
 
-      @include sm {
-        // animation-name: closeModalSm !important;
-      }
+        @include sm {
+            // animation-name: closeModalSm !important;
+        }
     }
-  }
+}
 
-  @include sm {
+@include sm {
     .my-modal {
-      &:not(.my-modal_drawer) {
-        top: initial;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        transform: none;
-        min-width: initial;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        // animation-name: openModalSm;
-        &.scroll {
-          top: 0;
-        }
-      }
-
-      &_drawer {
-        top: 0;
-        bottom: 0;
-        right: 0;
-        min-width: 100vw;
-        width: initial;
-
-        .my-modal__head {
-          padding: 4px 48px 4px 16px;
-
-          .my-modal__head-close {
-            top: 4px;
-            right: 4px;
-          }
-          .my-modal__head-text {
-            padding: 8px 0;
-          }
-          .my-modal__head-back {
+        &:not(.my-modal_drawer) {
             top: initial;
-            left: -12px;
-          }
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transform: none;
+            min-width: initial;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            // animation-name: openModalSm;
+            &.scroll {
+                top: 0;
+            }
         }
-      }
 
-      &_notification {
-        max-width: initial;
-      }
+        &_drawer {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            min-width: 100vw;
+            width: initial;
 
-      &__head {
-        padding: 16px 56px 16px 16px;
-      }
-      &__body {
-        //padding: 0 16px;
-      }
-      &__footer {
-        padding: 16px;
-        gap: 12px;
+            .my-modal__head {
+                padding: 4px 48px 4px 16px;
 
-        .btn {
-          flex: 1;
+                .my-modal__head-close {
+                    top: 4px;
+                    right: 4px;
+                }
+
+                .my-modal__head-text {
+                    padding: 8px 0;
+                }
+
+                .my-modal__head-back {
+                    top: initial;
+                    left: -12px;
+                }
+            }
         }
-      }
+
+        &_notification {
+            max-width: initial;
+        }
+
+        &__head {
+            padding: 16px 56px 16px 16px;
+        }
+
+        &__body {
+            //padding: 0 16px;
+        }
+
+        &__footer {
+            padding: 16px;
+            gap: 12px;
+
+            .btn {
+                flex: 1;
+            }
+        }
     }
-  }
+}
 
-  .my-modal-shadow {
+.my-modal-shadow {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -362,175 +388,176 @@
     animation-direction: normal;
 
     &.active {
-      display: block;
+        display: block;
 
-       animation-name: showShadow;
+        animation-name: showShadow;
     }
 
     &.disabling {
-      display: block;
-       animation-name: hideShadow;
+        display: block;
+        animation-name: hideShadow;
     }
-  }
+}
 
-  @keyframes closeNotification {
+@keyframes closeNotification {
     0% {
-      transform: translateX(0);
-      opacity: 1;
+        transform: translateX(0);
+        opacity: 1;
     }
     100% {
-      transform: translateX(1000px);
-      opacity: 0;
+        transform: translateX(1000px);
+        opacity: 0;
     }
-  }
+}
 
-  @keyframes showNotification {
+@keyframes showNotification {
     0% {
-      transform: translateX(1000px);
-      opacity: 0;
+        transform: translateX(1000px);
+        opacity: 0;
     }
     100% {
-      transform: translateX(0);
-      opacity: 1;
+        transform: translateX(0);
+        opacity: 1;
     }
-  }
+}
 
-  @keyframes showShadow {
+@keyframes showShadow {
     0% {
-      opacity: 0;
+        opacity: 0;
     }
     100% {
-      opacity: 1;
+        opacity: 1;
     }
-  }
+}
 
-  @keyframes hideShadow {
+@keyframes hideShadow {
     0% {
-      opacity: 1;
+        opacity: 1;
     }
     100% {
-      opacity: 0;
+        opacity: 0;
     }
-  }
+}
 
-  @keyframes openMenu {
+@keyframes openMenu {
     0% {
-      transform: scale(0.6);
-      transform-origin: 0% -20%;
-      opacity: 0;
+        transform: scale(0.6);
+        transform-origin: 0% -20%;
+        opacity: 0;
     }
     100% {
-      transform: scale(1);
-      transform-origin: 0% 0%;
-      opacity: 1;
+        transform: scale(1);
+        transform-origin: 0% 0%;
+        opacity: 1;
     }
-  }
+}
 
-  @keyframes openDrawer {
+@keyframes openDrawer {
     0% {
-      right: -400px;
-      opacity: 0;
+        right: -400px;
+        opacity: 0;
     }
     100% {
-      right: 0;
-      opacity: 1;
+        right: 0;
+        opacity: 1;
     }
-  }
+}
 
-  @keyframes openDrawerSm {
+@keyframes openDrawerSm {
     0% {
-      //right: -400px;
-      opacity: 0;
+        //right: -400px;
+        opacity: 0;
     }
     100% {
-      right: 0;
-      opacity: 1;
+        right: 0;
+        opacity: 1;
     }
-  }
+}
 
-  @keyframes closeDrawer {
+@keyframes closeDrawer {
     0% {
-      right: 0;
-      opacity: 1;
+        right: 0;
+        opacity: 1;
     }
     100% {
-      right: -400px;
-      opacity: 0;
+        right: -400px;
+        opacity: 0;
     }
-  }
+}
 
-  @keyframes closeDrawerSm {
+@keyframes closeDrawerSm {
     0% {
-      right: 0;
-      opacity: 1;
+        right: 0;
+        opacity: 1;
     }
     100% {
-      //right: -400px;
-      opacity: 0;
+        //right: -400px;
+        opacity: 0;
     }
-  }
+}
 
-  @keyframes openModal {
+@keyframes openModal {
     0% {
-      top: 60%;
-      opacity: 0;
+        top: 60%;
+        opacity: 0;
     }
     100% {
-      top: 50%;
-      opacity: 1;
+        top: 50%;
+        opacity: 1;
     }
-  }
+}
 
-  @keyframes openModalScroll {
+@keyframes openModalScroll {
     0% {
-      top: 60%;
-      opacity: 0;
+        top: 60%;
+        opacity: 0;
     }
     100% {
-      top: 0;
-      opacity: 1;
+        top: 0;
+        opacity: 1;
     }
-  }
+}
 
-  @keyframes openModalSm {
+@keyframes openModalSm {
     0% {
-      bottom: -200px;
-      opacity: 0;
+        bottom: -200px;
+        opacity: 0;
     }
     100% {
-      bottom: 0;
-      opacity: 1;
+        bottom: 0;
+        opacity: 1;
     }
-  }
+}
 
-  @keyframes closeModal {
+@keyframes closeModal {
     0% {
-      top: 50%;
-      opacity: 1;
+        top: 50%;
+        opacity: 1;
     }
     100% {
-      top: 60%;
-      opacity: 0;
+        top: 60%;
+        opacity: 0;
     }
-  }
-  @keyframes closeModalScroll {
-    0% {
-      top: 0;
-      opacity: 1;
-    }
-    100% {
-      top: 60%;
-      opacity: 0;
-    }
-  }
+}
 
-  @keyframes closeModalSm {
+@keyframes closeModalScroll {
     0% {
-      bottom: 0;
-      opacity: 1;
+        top: 0;
+        opacity: 1;
     }
     100% {
-      bottom: -200px;
-      opacity: 0;
+        top: 60%;
+        opacity: 0;
+    }
+}
+
+@keyframes closeModalSm {
+    0% {
+        bottom: 0;
+        opacity: 1;
+    }
+    100% {
+        bottom: -200px;
+        opacity: 0;
     }
 }
