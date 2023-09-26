@@ -18,6 +18,11 @@ class AddConfigToView
     public function handle($request, Closure $next)
     {
         $config = Config::get('custom');
+
+        if (auth()->check() && auth()->user()->admin == 1) {
+            $config['admin'] = true;
+        }
+
         // Добавляем переменную с названием текущего маршрута во все представления
         View::share('config', $config);
 
